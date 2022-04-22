@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import './date_picker_bottom_sheet.dart';
-import './date_picker_in_page.dart';
-import './datetime_picker_bottom_sheet.dart';
-import './datetime_picker_in_page.dart';
-import './time_picker_bottom_sheet.dart';
-import './time_picker_in_page.dart';
+import 'date_picker_bottom_sheet.dart';
+import 'date_picker_in_page.dart';
+import 'datetime_picker_bottom_sheet.dart';
+import 'datetime_picker_in_page.dart';
+import 'time_picker_bottom_sheet.dart';
+import 'time_picker_in_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,8 +34,10 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            RaisedButton(
-              color: Colors.blue,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                onPrimary: Colors.blue,
+              ),
               child: Text("DatePicker Bottom Sheet", style: textStyle),
               onPressed: () {
                 Navigator.of(context)
@@ -44,8 +46,10 @@ class MyHomePage extends StatelessWidget {
                 }));
               },
             ),
-            RaisedButton(
-              color: Colors.blue,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                onPrimary: Colors.blue,
+              ),
               child: Text("DatePicker In Page", style: textStyle),
               onPressed: () {
                 Navigator.of(context)
@@ -54,8 +58,10 @@ class MyHomePage extends StatelessWidget {
                 }));
               },
             ),
-            RaisedButton(
-              color: Colors.blue,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                onPrimary: Colors.blue,
+              ),
               child: Text("TimePicker Bottom Sheet", style: textStyle),
               onPressed: () {
                 Navigator.of(context)
@@ -64,8 +70,10 @@ class MyHomePage extends StatelessWidget {
                 }));
               },
             ),
-            RaisedButton(
-              color: Colors.blue,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                onPrimary: Colors.blue,
+              ),
               child: Text("TimePicker In Page", style: textStyle),
               onPressed: () {
                 Navigator.of(context)
@@ -74,8 +82,10 @@ class MyHomePage extends StatelessWidget {
                 }));
               },
             ),
-            RaisedButton(
-              color: Colors.blue,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                onPrimary: Colors.blue,
+              ),
               child: Text("DateTimePicker Bottom Sheet", style: textStyle),
               onPressed: () {
                 Navigator.of(context)
@@ -84,8 +94,10 @@ class MyHomePage extends StatelessWidget {
                 }));
               },
             ),
-            RaisedButton(
-              color: Colors.blue,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                onPrimary: Colors.blue,
+              ),
               child: Text("DateTimePicker In Page", style: textStyle),
               onPressed: () {
                 Navigator.of(context)

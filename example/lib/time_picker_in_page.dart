@@ -100,7 +100,7 @@ class _TimePickerInPageState extends State<TimePickerInPage> {
             // date format input field
             Container(
               margin: EdgeInsets.only(top: 8.0, bottom: 40.0),
-              child: TimePickerWidget(
+              child: DateTimePickerWidget(
                 minDateTime: DateTime.parse(MIN_DATETIME),
                 maxDateTime: DateTime.parse(MAX_DATETIME),
                 initDateTime: DateTime.parse(INIT_DATETIME),

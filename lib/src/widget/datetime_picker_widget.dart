@@ -8,7 +8,6 @@ import '../date_picker_theme.dart';
 import '../date_time_formatter.dart';
 import '../i18n/date_picker_i18n.dart';
 import 'date_picker_title_widget.dart';
-import 'date_picker_widget.dart';
 
 /// DateTimePicker widget. Can display date and time picker.
 class DateTimePickerWidget extends StatefulWidget {
@@ -26,6 +25,8 @@ class DateTimePickerWidget extends StatefulWidget {
     this.onChange,
     this.onConfirm,
     this.onMonthChangeStartWithFirstDate = false,
+    this.dividerChild,
+    this.dividerOverlayDecoration,
   }) : super(key: key) {
     DateTime minTime = minDateTime ?? DateTime.parse(DATE_PICKER_MIN_DATETIME);
     DateTime maxTime = maxDateTime ?? DateTime.parse(DATE_PICKER_MAX_DATETIME);
@@ -41,6 +42,8 @@ class DateTimePickerWidget extends StatefulWidget {
   final DateValueCallback? onChange, onConfirm;
   final int minuteDivider;
   final bool onMonthChangeStartWithFirstDate;
+  final Widget? dividerChild;
+  final BoxDecoration? dividerOverlayDecoration;
 
   @override
   State<StatefulWidget> createState() => _DateTimePickerWidgetState(
@@ -272,8 +275,23 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
       );
       pickers.add(pickerColumn);
     });
+
+    if(widget.dividerChild != null) {
+      for(int i = 0; i < pickers.length - 1; i+=2) {
+        pickers.insert(i + 1, Container(
+          alignment: Alignment.center,
+          height: widget.pickerTheme.itemHeight,
+          decoration: widget.dividerOverlayDecoration
+              ?? _defaultOverlaySelectionPicker(),
+          child: widget.dividerChild,
+        ));
+      }
+    }
+
     return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween, children: pickers);
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: pickers,
+    );
   }
 
   Widget _renderDatePickerColumnComponent({
@@ -294,7 +312,6 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
     };
 
     Widget columnWidget = Container(
-      padding: EdgeInsets.all(8.0),
       width: double.infinity,
       height: widget.pickerTheme.pickerHeight,
       decoration: BoxDecoration(color: widget.pickerTheme.backgroundColor),
@@ -302,13 +319,7 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
         backgroundColor: widget.pickerTheme.backgroundColor,
         scrollController: scrollCtrl,
         selectionOverlay: widget.pickerTheme.selectionOverlay ??
-            Container(
-              decoration: BoxDecoration(
-                border: Border.symmetric(
-                  horizontal: BorderSide(color: Colors.black26),
-                ),
-              ),
-            ),
+            Container(decoration: _defaultOverlaySelectionPicker()),
         itemExtent: widget.pickerTheme.itemHeight,
         onSelectedItemChanged: valueChanged,
         childCount: format.contains('m')
@@ -323,9 +334,17 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
     );
   }
 
+  BoxDecoration _defaultOverlaySelectionPicker() {
+    return BoxDecoration(
+      border: Border.symmetric(
+        horizontal: BorderSide(color: GRAY_OVERLAY),
+      ),
+    );
+  }
+
   _calculateMinuteChildCount(List<int> valueRange, int divider) {
     if (divider == 0) {
-      debugPrint("Cant devide by 0");
+      debugPrint("Cannot devide by 0");
       return (valueRange.last - valueRange.first + 1);
     }
 
